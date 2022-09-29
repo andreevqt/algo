@@ -1,4 +1,4 @@
-package main.java.sprint5;
+package main.java.sprint6;
 
 /* 
  * Задан неориентированный граф. Обойдите поиском в ширину все вершины, 
