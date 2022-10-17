@@ -63,13 +63,13 @@ public class TaskB {
         colors[vertex] = Colors.GRAY;
         stack.add(vertex);
 
-        for (var sibling : g.get(vertex)) {
-          if (colors[sibling] == Colors.WHITE) {
-            stack.add(sibling);
+        for (var neighbour : g.get(vertex)) {
+          if (colors[neighbour] == Colors.WHITE) {
+            stack.add(neighbour);
             continue;
           }
 
-          if (colors[sibling] == Colors.GRAY) {
+          if (colors[neighbour] == Colors.GRAY) {
             return true;
           }
         }
