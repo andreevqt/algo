@@ -64,7 +64,7 @@ public class TaskA {
     var visited = new boolean[V];
     var visitedCount = 0;
 
-    var pq = new PriorityQueue<Node>((v1, v2) -> v2.weight - v1.weight);
+    var pq = new PriorityQueue<Node>((v1, v2) -> Integer.compare(v2.weight, v1.weight));
     pq.add(new Node(s, 0));
 
     var maxWeight = 0;
