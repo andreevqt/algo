@@ -27,8 +27,37 @@ import java.io.InputStreamReader;
 
 public class TaskA {
 
-  static int min(int a, int b, int c) {
+  private static int min(int a, int b, int c) {
     return Math.min(Math.min(a, b), c);
+  }
+
+  private static int levensteinDistance(String str1, String str2) {
+    var n = str1.length();
+    var m = str2.length();
+
+    var dp = new int[2][m + 1];
+
+    for (int i = 0; i <= m; i++) {
+      dp[0][i] = i;
+    }
+
+    for (int i = 1; i <= n; i++) {
+      dp[i % 2][0] = i;
+
+      for (int j = 1; j <= m; j++) {
+        if (str1.charAt((i - 1) % 2) == str2.charAt(j - 1)) {
+          dp[i % 2][j] = dp[(i - 1) % 2][j - 1];
+        } else {
+          dp[i % 2][j] = min(dp[i % 2][j - 1], dp[(i - 1) % 2][j], dp[(i - 1) % 2][j - 1]) + 1;
+        }
+
+        if (i == n && j == m) {
+          return dp[i % 2][j];
+        }
+      }
+    }
+
+    return -1;
   }
 
   public static void main(String[] args) throws IOException {
@@ -37,29 +66,6 @@ public class TaskA {
     var str1 = br.readLine();
     var str2 = br.readLine();
 
-    var n = str1.length();
-    var m = str2.length();
-
-    var dp = new int[n + 1][m + 1];
-
-    for (int i = 0; i <= n; i++) {
-      dp[i][0] = i;
-    }
-
-    for (int i = 0; i <= m; i++) {
-      dp[0][i] = i;
-    }
-
-    for (int i = 1; i <= n; i++) {
-      for (int j = 1; j <= m; j++) {
-        if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
-          dp[i][j] = dp[i - 1][j - 1];
-        } else {
-          dp[i][j] = min(dp[i][j - 1], dp[i - 1][j], dp[i - 1][j - 1]) + 1;
-        }
-      }
-    }
-
-    System.out.println(dp[n][m]);
+    System.out.println(levensteinDistance(str1, str2));
   }
 }
