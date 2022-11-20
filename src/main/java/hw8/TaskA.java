@@ -1,7 +1,7 @@
 package main.java.hw8;
 
 /*
- * https://contest.yandex.ru/contest/26133/run-report/75550215/
+ * https://contest.yandex.ru/contest/26133/run-report/75550957/
  *
  * -- ПРИНЦИП РАБОТЫ --
  * Распаковываем строки и потом считаем их общий префикс
@@ -12,7 +12,7 @@ package main.java.hw8;
  * -- ВРЕМЕННАЯ СЛОЖНОСТЬ --
  * decode: O(L * S) - где, L - длина строки, S - сумма множителей
  * longestCommonPrefix = O(MIN*N)  - где, N - количество строк, MIN - минимальная длина строки
- * O(L * S) * N + O(MAX*N*Log(N)) = O(L*S*N + MAX*N*Log(N)) - сложность всего алгоритма
+ * O(L * S) * N + O(MIN*N) = O(L*S*N + MIN*N) - сложность всего алгоритма
  * -- ПРОСТРАНСТВЕННАЯ СЛОЖНОСТЬ --
  * O(N*M) - где N - количество строк, M - средняя длина строки
  * */
@@ -62,7 +62,7 @@ public class TaskA {
     return word.toString();
   }
 
-  private static String longestCommonPrefix(String min, String strings[]) {
+  private static String longestCommonPrefix(String strings[], String min) {
     var sb = new StringBuilder();
     var isOk = true;
 
@@ -76,7 +76,7 @@ public class TaskA {
       if (!isOk) {
         break;
       }
-      sb.append(min.charAt(i));
+      sb.append(strings[0].charAt(i));
     }
 
     return sb.toString();
@@ -98,7 +98,7 @@ public class TaskA {
       strings[i] = str;
     }
 
-    var commonPrefix = longestCommonPrefix(min, strings);
+    var commonPrefix = longestCommonPrefix(strings, min);
     System.out.println(commonPrefix);
   }
 }
